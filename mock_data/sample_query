@@ -1,0 +1,40 @@
+
+CREATE TABLE owner (
+  id SERIAL,
+  name varchar,
+  unique(id)
+);
+
+
+
+CREATE TABLE owner_device (
+  id SERIAL,
+  owner INTEGER,
+  device varchar(150),
+  unique(id),
+  FOREIGN KEY (owner) REFERENCES owner (id)
+);
+
+
+CREATE TABLE device_data (
+  datetime TIMESTAMP NOT NULL,
+  device_id INTEGER,
+  temperature DOUBLE PRECISION,
+  humidity DOUBLE PRECISION,
+  FOREIGN KEY (device_id) REFERENCES owner_device (id)
+);
+
+ INSERT INTO device_data (datetime, device_id, temperature, humidity)
+                SELECT
+                datetime,
+                device_id,
+                random()*100 AS temperature,
+                random()*.05 As humidity
+                FROM generate_series(now() - interval '30 day', now(), interval '1 hour') AS g1(datetime),
+                generate_series(1,1) AS g2(device_id)
+                
+                
+ select count(*) from device_data;
+                
+ delete from device_data               
+ 
