@@ -8,6 +8,3 @@ A more easier way would be exporting this in /usr/bin/activate file so that ever
 
 Refer management command for data generation script logic - `/data_generation/app/management/commands/generate_data.py`
 
-## Medium Blog Reference
-
-[]()
